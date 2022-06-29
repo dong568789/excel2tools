@@ -1,7 +1,7 @@
-# Excel转Json、Go、Java
+# Excel2Json、Go、Java
 
 ```
 go build
-excel2tools 文件名
+excel2tools filepath
 
 ```

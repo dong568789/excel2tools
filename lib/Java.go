@@ -24,8 +24,8 @@ func (jf *JField) BuildAttribute() string {
 func (jf *JField) BuildFun() string {
 	types := jf.converType()
 	upName := utils.ToUcFirst(jf.Name)
-	getFun := fmt.Sprintf("	public %s get%s(){return this.%s}\n", types, upName, jf.Name)
-	setFun := fmt.Sprintf("	public void set%s(%s %s){this.%s = %s}\n", upName, types, jf.Name, jf.Name, jf.Name)
+	getFun := fmt.Sprintf("	public %s get%s(){return this.%s;}\n", types, upName, jf.Name)
+	setFun := fmt.Sprintf("	public void set%s(%s %s){this.%s = %s;}\n", upName, types, jf.Name, jf.Name, jf.Name)
 	return getFun + setFun
 }
 
@@ -33,7 +33,7 @@ func (jc *JavaClass) Build() string {
 	var javaClass strings.Builder
 	var attribute strings.Builder
 	var fun strings.Builder
-	javaClass.WriteString(fmt.Sprintf("class %s {\n", jc.Name))
+	javaClass.WriteString(fmt.Sprintf("public class %s {\n", jc.Name))
 	for _, field := range jc.Fs {
 		attribute.WriteString(field.BuildAttribute())
 		fun.WriteString(field.BuildFun())

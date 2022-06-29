@@ -102,13 +102,15 @@ type kv map[string]interface{}
 func (e *Excel) ToJson() []byte {
 	var arr []kv
 	for _, row := range e.rows {
-		m := make(kv)
-		for i, cell := range row {
-			if i < len(e.FieldRead) && e.FieldRead[i] != "" {
-				m[e.FieldName[i]] = e.converType(e.FieldType[i], cell)
+		if len(row) > 0 {
+			m := make(kv)
+			for i, cell := range row {
+				if i < len(e.FieldRead) && e.FieldRead[i] != "" {
+					m[e.FieldName[i]] = e.converType(e.FieldType[i], cell)
+				}
 			}
+			arr = append(arr, m)
 		}
-		arr = append(arr, m)
 	}
 	jsonBytes, _ := json.Marshal(arr)
 	return jsonBytes
